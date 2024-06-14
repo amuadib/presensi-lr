@@ -102,9 +102,9 @@ class PresensiService
         $sekarang = strtotime($waktu);
 
         if ($jenis == 'datang') {
-            return $sekarang > strtotime(date('Y-m-d ' . $jam_aktif['mulai']));
+            return $sekarang > strtotime(date('Y-m-d ' . $jam_aktif['mulai'] . ':00'));
         } elseif ($jenis == 'pulang') {
-            return $sekarang > strtotime(date('Y-m-d ' . $jam_aktif['selesai_presensi']));
+            return $sekarang > strtotime(date('Y-m-d ' . $jam_aktif['selesai_presensi'] . ':00'));
         }
     }
 
