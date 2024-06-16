@@ -156,6 +156,10 @@ class PresensiService
         foreach ($pembagian as $pb) {
             foreach ($pb->jam['jam'] as $j) {
                 if (intval($j['hari']) == $waktu->dayOfWeek) {
+
+                    if ($j['datang'] == '' or $j['pulang'] == '') { //lewati hari yang kosong
+                        break;
+                    }
                     $nama = $pb->jam->singkatan != '' ? $pb->jam->singkatan : $pb->jam->nama;
                     $m  = new Carbon();
                     $s  = new Carbon();
