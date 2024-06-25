@@ -37,7 +37,33 @@ class Pengguna extends Component
     }
     public function getKodePulang($id)
     {
-        User::find($id)->authable->update(['kode_pulang' => rand(111111, 999999)]);
+        $me = \Auth::user();
+        $user = User::find($id);
+        $blacklist = $me->authable->blacklist_kode_pulang;
+        $blacklisted = false;
+
+        //Petugas
+        if ($user->role() !== 'Anggota') {
+            $this->emit('alert', ['type' => 'warning', 'message' => 'Kode Pulang tidak dapat dibuat.']);
+            return;
+        }
+
+        //Petugas mempunyai blacklist
+        if (is_array($blacklist) && count(($blacklist)) > 0) {
+            foreach ($blacklist as $b) {
+                if ($b['type'] == $user->role() && $b['id'] == $user->authable_id) {
+                    $blacklisted = true;
+                    break;
+                }
+            }
+        }
+
+        if ($blacklisted) {
+            $this->emit('alert', ['type' => 'warning', 'message' => 'Kode Pulang tidak dapat dibuat.']);
+            return;
+        }
+
+        $user->authable->update(['kode_pulang' => rand(111, 999) . rand(111, 999)]);
     }
     public function setAktif($id, $status)
     {

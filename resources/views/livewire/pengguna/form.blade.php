@@ -341,36 +341,6 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-6 gap-6">
-                            <div class="col-span-6 sm:col-span-4">
-                                <label for="bisa_membuat_kode" class="block font-medium text-gray-700">Pengguna bisa
-                                    membuat kode?</label>
-                                <div class="flex">
-                                    <div class="form-check form-check-inline mr-2 w-32">
-                                        <label class="form-check-label inline-block cursor-pointer text-gray-800"
-                                            for="bisa_membuat_kode_y">
-                                            <input
-                                                class="form-check-input float-left mr-2 mt-1 h-4 w-4 cursor-pointer appearance-none rounded-full border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none"
-                                                type="radio" name="bisa_membuat_kode" id="bisa_membuat_kode_y"
-                                                value="y" wire:model.defer="pengguna.bisa_membuat_kode"
-                                                @if (isset($pengguna['bisa_membuat_kode']) and $pengguna['bisa_membuat_kode'] == 'y') checked @endif>Ya</label>
-                                    </div>
-                                    <div class="form-check form-check-inline mr-2 w-32">
-                                        <label class="form-check-label inline-block cursor-pointer text-gray-800"
-                                            for="bisa_membuat_kode_n">
-                                            <input
-                                                class="form-check-input float-left mr-2 mt-1 h-4 w-4 cursor-pointer appearance-none rounded-full border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none"
-                                                type="radio" name="bisa_membuat_kode" value="n"
-                                                id="bisa_membuat_kode_n" wire:model.defer="pengguna.bisa_membuat_kode"
-                                                @if (isset($pengguna['bisa_membuat_kode']) and $pengguna['bisa_membuat_kode'] == 'n') checked @endif>Tidak</label>
-                                    </div>
-                                </div>
-                                @error('pengguna.bisa_membuat_kode')
-                                    <small class="text-red-800">{{ $message }}</small>
-                                @enderror
-                            </div>
-                        </div>
-
                         @if ($mode == 'create')
                             <small class="text-gray-600">*: {{ __('Phone Number') }} akan digunakan sebagai Username
                                 dan
