@@ -169,7 +169,7 @@ class FormPresensi extends Component
             if (
                 $ps->isJamKerjaAktif($jam_aktif)
                 or
-                $ps->isTerlambat($this->jenis, $this->form['waktu'], $jam_aktif)
+                $ps->isTerlambat($this->jenis, $waktu_submit, $jam_aktif)
             ) {
                 $cek = $ps->cekKodePulang(\Auth::user(), $this->kode_pulang, $this->form['keterangan']);
                 if ($cek['error']) {
@@ -177,8 +177,8 @@ class FormPresensi extends Component
                     return;
                 }
             }
-            if ($ps->isTerlambat($this->jenis, $this->form['waktu'], $jam_aktif)) {
-                $keterangan = 'Terlambat ' . timeDiff(strtotime($this->form['waktu']), strtotime($jam_aktif['selesai'])) .
+            if ($ps->isTerlambat($this->jenis, $waktu_submit, $jam_aktif)) {
+                $keterangan = 'Terlambat ' . timeDiff(strtotime($waktu_submit), strtotime($jam_aktif['selesai'])) .
                     '. Keterangan: ' . $this->form['keterangan'];
                 $this->form['keterangan'] = $keterangan;
             }
