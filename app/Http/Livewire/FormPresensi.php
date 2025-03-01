@@ -62,6 +62,7 @@ class FormPresensi extends Component
 
     public function store(PresensiService $ps)
     {
+        $waktu_submit = date('Y-m-d H:i:s');
         $data = [];
         if ($this->jam_kerja_id == null) {
             $this->emit('alert', ['type' => 'error', 'message' => 'Silahkan pilih Jam Kerja terlebih dahulu.']);
@@ -126,9 +127,9 @@ class FormPresensi extends Component
 
             $this->form['jam_id'] = $this->jam_kerja_id;
 
-            if ($this->form['jenis'] == 'h' && $ps->isTerlambat($this->jenis, $this->form['waktu'], $jam_aktif)) {
+            if ($this->form['jenis'] == 'h' && $ps->isTerlambat($this->jenis, $waktu_submit, $jam_aktif)) {
                 $this->form['jenis'] = 't';
-                $this->form['keterangan'] = 'Terlambat ' . timeDiff(strtotime($this->form['waktu']), strtotime($jam_aktif['mulai']));
+                $this->form['keterangan'] = 'Terlambat ' . timeDiff(strtotime($waktu_submit), strtotime($jam_aktif['mulai']));
             }
             if ($this->form['jenis'] == 'c' || $this->form['jenis'] == 'd') {
                 $begin = new \DateTime($this->tgl1);
