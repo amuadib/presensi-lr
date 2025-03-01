@@ -55,9 +55,10 @@ class WajahService
         if (isset($out[0])) {
             $coord = explode(',', $out[0]);
         } else {
+            \Illuminate\Support\Facades\Log::error('Command error: {command}', ['command' => $command]);
             return [
                 'code' => '5',
-                'message' => 'Command error: ' . $command
+                'message' => 'Command error. Please check Log file'
             ];
         }
         // @unlink($path . '/' . $test_file);
